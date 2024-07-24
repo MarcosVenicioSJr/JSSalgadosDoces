@@ -37,4 +37,15 @@ public class ProductController {
         return ResponseEntity.created(uri).build();
     }
     
+    @DeleteMapping("/{id}")
+    public ResponseEntity Delete(@PathVariable Integer id){
+        this.productServices.Delete(id);
+        return ResponseEntity.ok().build();
+    }
+    
+    @PutMapping
+    public ResponseEntity Put(@RequestBody Product entity){
+        this.productServices.Update(entity);
+        return ResponseEntity.ok().build();
+    }
 }

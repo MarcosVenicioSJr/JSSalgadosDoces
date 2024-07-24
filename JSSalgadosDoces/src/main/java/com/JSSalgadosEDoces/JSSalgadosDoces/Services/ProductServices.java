@@ -43,7 +43,25 @@ public class ProductServices {
             byte[] decodeBase64 = Base64.decodeBase64(entity.getProductImage().toString());
             entity.setProductImage(decodeBase64);
         }catch(Exception e){
-            //throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Error");
+            throw new RuntimeException("Deu erro");
         }
+    }
+    
+    @Transactional
+    public void Delete(Integer id){
+        this.productRepository.deleteById(id);
+    }
+    
+    @Transactional
+    public void Update(Product entity){
+        Product entityUpdatable = GetById(entity.getProductId());
+        
+        entityUpdatable.setName(entity.getName());
+        entityUpdatable.setValue(entity.getValue());
+
+        DecodedImage(entity);
+        entityUpdatable.setProductImage(entity.getProductImage());
+
+        this.productRepository.save(entityUpdatable);
     }
 }
