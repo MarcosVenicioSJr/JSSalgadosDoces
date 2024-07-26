@@ -5,6 +5,7 @@ import com.JSSalgadosEDoces.JSSalgadosDoces.Services.OrderingService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,6 +34,7 @@ public class OrderingController {
     }
     
     @PostMapping
+    @Validated(Ordering.class)
     public ResponseEntity Create(@RequestBody Ordering entity){
         this.orderingServiceservice.Create(entity);
 

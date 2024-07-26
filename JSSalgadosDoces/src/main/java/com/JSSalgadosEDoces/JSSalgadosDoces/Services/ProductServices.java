@@ -38,13 +38,18 @@ public class ProductServices {
         entity = this.productRepository.save(entity);  
         return entity;
     }
-    
-    private void DecodedImage(Product entity){
-        try{
-            byte[] decodeBase64 = Base64.decodeBase64(entity.getProductImage().toString());
-            entity.setProductImage(decodeBase64);
-        }catch(Exception e){
-            throw new RuntimeException("Deu erro");
+
+    private void DecodedImage(Product entity) {
+        try {
+            String encodedImage = Base64.encodeBase64String(entity.getProductImage());
+            byte[] decodedBytes = Base64.decodeBase64(encodedImage);
+            entity.setProductImage(decodedBytes);
+            
+        } catch (Exception e) {
+            // Loga a exceção e lança uma nova com a causa original
+            System.err.println("Error decoding image for product: " + entity.getProductId());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to decode image: " + e.getMessage(), e);
         }
     }
     
