@@ -1,5 +1,6 @@
 package com.JSSalgadosEDoces.JSSalgadosDoces.Controller;
 
+import com.JSSalgadosEDoces.JSSalgadosDoces.Models.DTO.OrderingDTO;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Ordering;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Services.OrderingService;
 import org.apache.coyote.Response;
@@ -35,11 +36,11 @@ public class OrderingController {
     
     @PostMapping
     @Validated(Ordering.class)
-    public ResponseEntity Create(@RequestBody Ordering entity){
-        this.orderingServiceservice.Create(entity);
+    public ResponseEntity Create(@RequestBody OrderingDTO entity){
+        Ordering order = this.orderingServiceservice.Create(entity);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(entity.getOrderingId()).toUri();
+                .buildAndExpand(order.getOrderingId()).toUri();
         
         return ResponseEntity.created(uri).build();
     }

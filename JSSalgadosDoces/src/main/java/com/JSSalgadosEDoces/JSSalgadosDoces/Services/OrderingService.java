@@ -1,5 +1,7 @@
 package com.JSSalgadosEDoces.JSSalgadosDoces.Services;
 
+import com.JSSalgadosEDoces.JSSalgadosDoces.Models.DTO.OrderingDTO;
+import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Mapper.OrderingMapper;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Ordering;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Repository.IOrderingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,11 @@ public class OrderingService {
     }
     
     @Transactional
-    public void Create(Ordering entity){
+    public Ordering Create(OrderingDTO dto){
+        Ordering entity = OrderingMapper.toOrdering(dto);
+        
         entity.setOrderingId(null);
-        this.orderingRepository.save(entity);
+        return this.orderingRepository.save(entity);
     }
     
     @Transactional
