@@ -2,8 +2,8 @@ package com.JSSalgadosEDoces.JSSalgadosDoces.Controller;
 
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.DTO.OrderingDTO;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Ordering;
+import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Responses.GetOrderingResponse;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Services.OrderingService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,12 +20,12 @@ public class OrderingController {
     private OrderingService orderingServiceservice;
     
     @GetMapping
-    public ResponseEntity<List<Ordering>> GetAll(){
+    public ResponseEntity<List<GetOrderingResponse>> GetAll(){
         return ResponseEntity.ok().body(this.orderingServiceservice.GetAll());
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Ordering> GetById(@PathVariable Integer id){
+    public ResponseEntity<GetOrderingResponse> GetById(@PathVariable Integer id){
         return ResponseEntity.ok().body(this.orderingServiceservice.GetById(id));
     }
     

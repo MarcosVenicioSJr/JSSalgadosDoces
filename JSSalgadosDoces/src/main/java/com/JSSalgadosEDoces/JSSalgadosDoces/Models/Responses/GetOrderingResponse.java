@@ -1,6 +1,5 @@
-package com.JSSalgadosEDoces.JSSalgadosDoces.Models.DTO;
+package com.JSSalgadosEDoces.JSSalgadosDoces.Models.Responses;
 
-import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Client;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Enums.OrderingStatus;
 import com.JSSalgadosEDoces.JSSalgadosDoces.Models.Product;
 import lombok.Getter;
@@ -12,11 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
-public class OrderingDTO {
+public class GetOrderingResponse {
+    private Integer orderingId;
     private Date requestDate;
     private Date deliveryDate;
     private OrderingStatus status;
     private boolean isDelivery;
-    private List<Integer> products = new ArrayList<>();
-    private Client client;
+    private String name;
+    private String phone;
+    private List<Product> products = new ArrayList<Product>();
 }
